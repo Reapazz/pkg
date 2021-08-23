@@ -79,8 +79,8 @@ public class webDriver {
 	// public static FirefoxProfile profile,profile2,profile3,profile4, profile5,
 	// profile6;
 
-	//public static File file = new File("./profiles2/Profile1"); // Ehlers
-	//public static File file2 = new File("./profiles2/Profile2");// Elise Sierra
+	// public static File file = new File("./profiles2/Profile1"); // Ehlers
+	// public static File file2 = new File("./profiles2/Profile2");// Elise Sierra
 	public static File file1 = new File("./profiles2/Profile3");// Riaz Sawyer
 	public static File file2 = new File("./profiles2/Profile4");// FrederickVelez
 	public static File file3 = new File("./profiles2/Profile5");// Eleni Hansen
@@ -107,15 +107,14 @@ public class webDriver {
 	public static FirefoxProfile profile4 = new FirefoxProfile(file4);
 	public static FirefoxProfile profile5 = new FirefoxProfile(file5);
 
-	
 	public int waitTime;
 	public static String currentProfile;
 	public static int botCounter = 3;
 	public static int noChangeProfiles = 0;
 	public String profileError = null;
-	
+
 	public webDriver(String messageTimestamp, int wait) {
-	
+
 		timestamp = messageTimestamp;
 		waitTime = wait;
 	}
@@ -145,42 +144,38 @@ public class webDriver {
 		TimeUnit.MILLISECONDS.sleep(1500);
 		Actions actions = new Actions(SeleniumBot);
 		JavascriptExecutor jse = (JavascriptExecutor) SeleniumBot;
-	
+
 		while (true) {
-			
-			if (noChangeProfiles > 5) {
+
+			if (noChangeProfiles > 7) {
 				profileError = currentProfile;
-				
-				driver.counterTabs
-				.setText("Total Shills: " + driver.shillCounter + "    Profile: " +
-		webDriver.currentProfile + "   Profile Error: "+ profileError);
-				
+
+				driver.counterTabs.setText("Total Shills: " + driver.shillCounter + "    Profile: "
+						+ webDriver.currentProfile + "   Profile Error: " + profileError);
+
 				chooseProfile();
-				
-				//chooseProfile();
+
+				// chooseProfile();
 				SeleniumBot.quit();
 				SeleniumBot = new FirefoxDriver(options);
-				
 
 				SeleniumBot.manage().window().maximize();
 				TimeUnit.MILLISECONDS.sleep(3000);
 				// Selenium2.manage().window().maximize();
 
 				SeleniumBot.get("https://webk.telegram.org");
-				
+
 				Selenium = SeleniumBot;
 
 				TimeUnit.MILLISECONDS.sleep(1500);
 				actions = new Actions(SeleniumBot);
-				
-				
+
 				TimeUnit.SECONDS.sleep(40);
-				
+
 			}
-			
+
 			noChangeProfiles++;
-			
-			
+
 			boolean recentError = false;
 			boolean success = false;
 			int scrollCounter = 0;
@@ -206,12 +201,16 @@ public class webDriver {
 
 				TimeUnit.MILLISECONDS.sleep(2000);
 
-				
 				File file = new File("./chatListLog.txt");
 				boolean inList = false;
+				WebElement scroller = SeleniumBot
+						.findElement(By.xpath("/html/body/div[2]/div[1]/div[3]/div/div/div[2]/div"));
+
+				scroller.sendKeys(Keys.PAGE_DOWN);
+
 				while (true) {
 					@SuppressWarnings("resource")
-				
+
 					Scanner scanner = new Scanner(file);
 
 					try {
@@ -221,7 +220,7 @@ public class webDriver {
 
 						while (scanner.hasNextLine()) {
 							String line = scanner.nextLine();
-								System.out.println("Scanner line: "+ line);
+							System.out.println("Scanner line: " + line);
 							if (line.equals(chatElement.getAttribute("data-peer-id"))) {
 								System.out.println("Chat Already in list");
 								chatNumber++;
@@ -285,13 +284,13 @@ public class webDriver {
 						scroller.sendKeys(Keys.PAGE_DOWN);
 					}
 
-					catch (Error scrollerFindError) {
+					catch (Exception scrollerFindError) {
 						scrollerFindError.printStackTrace();
 						break;
 
 					}
 					TimeUnit.MILLISECONDS.sleep(400);
-					
+
 					continue;
 				}
 			}
@@ -301,16 +300,22 @@ public class webDriver {
 				SeleniumBot
 						.findElement(By.xpath(
 								"/html/body/div[2]/div[1]/div[2]/div/div[2]/div[4]/div/div[1]/div[7]/div[1]/div[1]"))
-						.sendKeys("Hi there! Here is a quick message please take a look if you have the time");
+						.sendKeys(
+								"Hi there! If you have the time, please take a look at this new hidden gem launching very soon!  @HKUNToken");
 
 				SeleniumBot.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div/div[2]/div[4]/div/div[4]/button"))
 						.click();
 
 				TimeUnit.MILLISECONDS.sleep(500);
+				FileWriter writer = new FileWriter("chatListLog.txt", true);
+										writer.write("\r\n");
+								writer.write(chatString);
+								writer.close();
+				
 
 				int tryForwardMsgCounter = 0;
 				while (tryForwardMsgCounter < 3) {
-					
+
 					tryForwardMsgCounter++;
 					SeleniumBot.findElement(By.xpath("/html/body/div[2]/div[1]/div[1]/div/div/div[1]/div[2]/input"))
 							.sendKeys("tatabot");
@@ -333,11 +338,11 @@ public class webDriver {
 							.findElements(By.cssSelector("div[data-timestamp='" + timestamp + "']"));
 
 					WebElement mascotPicture = forwardedMessages.get(0);
-					WebElement appPicture = forwardedMessages.get(2);
+					// WebElement appPicture = forwardedMessages.get(2);
 					WebElement messageZee = forwardedMessages.get(1);
 
-					actions.moveToElement(appPicture);
-					actions.contextClick(appPicture).build().perform();
+					actions.moveToElement(mascotPicture);
+					actions.contextClick(mascotPicture).build().perform();
 					TimeUnit.MILLISECONDS.sleep(1200);
 
 					WebElement buttonPane = SeleniumBot.findElement(By.className("contextmenu"));
@@ -352,14 +357,6 @@ public class webDriver {
 					TimeUnit.MILLISECONDS.sleep(500);
 					actions.moveToElement(messageZee);
 					actions.click(messageZee).build().perform();
-					TimeUnit.MILLISECONDS.sleep(500);
-
-					pinnedButton.click();
-
-					TimeUnit.MILLISECONDS.sleep(800);
-
-					actions.moveToElement(mascotPicture);
-					actions.click(mascotPicture).build().perform();
 					TimeUnit.MILLISECONDS.sleep(500);
 
 					WebElement forwardButton = SeleniumBot.findElement(By.className("selection-container-forward"));
@@ -383,13 +380,12 @@ public class webDriver {
 
 						catch (Exception scrollError) {
 							try {
-								 
-								
+
 								scroller1.sendKeys(Keys.PAGE_DOWN);
 							} catch (Exception e2) {
 								System.out.println("Error scroll 1");
 								e2.printStackTrace();
-								
+
 								recentError = true;
 								break;
 							}
@@ -416,36 +412,33 @@ public class webDriver {
 					break;
 				}
 				if (success = true) {
-					success  = false;
-				FileWriter writer = new FileWriter("chatListLog.txt", true);
+					success = false;
+//					FileWriter writer = new FileWriter("chatListLog.txt", true);
+//
+//					writer.write("\r\n");
+//					writer.write(chatString);
+//					writer.close();
 
-				writer.write("\r\n");
-				writer.write(chatString);
-				writer.close();
+					driver.shillCounter++;
+					driver.counterTabs.setText("Total Shills: " + driver.shillCounter + "    Profile: "
+							+ webDriver.currentProfile + "   Profile Error: " + profileError);
 
-				driver.shillCounter++;
-				driver.counterTabs
-						.setText("Total Shills: " + driver.shillCounter + "    Profile: " +
-				webDriver.currentProfile + "   Profile Error: "+ profileError);
+					chooseProfile();
+					SeleniumBot.quit();
+					SeleniumBot = new FirefoxDriver(options);
 
-				chooseProfile();
-				SeleniumBot.quit();
-				SeleniumBot = new FirefoxDriver(options);
-				
+					SeleniumBot.manage().window().maximize();
+					TimeUnit.MILLISECONDS.sleep(3000);
+					// Selenium2.manage().window().maximize();
 
-				SeleniumBot.manage().window().maximize();
-				TimeUnit.MILLISECONDS.sleep(3000);
-				// Selenium2.manage().window().maximize();
+					SeleniumBot.get("https://webk.telegram.org");
 
-				SeleniumBot.get("https://webk.telegram.org");
-				
-				Selenium = SeleniumBot;
+					Selenium = SeleniumBot;
 
-				TimeUnit.MILLISECONDS.sleep(1500);
-				actions = new Actions(SeleniumBot);
-				
-				
-				TimeUnit.SECONDS.sleep(40);
+					TimeUnit.MILLISECONDS.sleep(1500);
+					actions = new Actions(SeleniumBot);
+
+					TimeUnit.SECONDS.sleep(40);
 				}
 
 			}
@@ -475,26 +468,25 @@ public class webDriver {
 			// SeleniumBot = new FirefoxDriver(options);
 			// Selenium2 = new FirefoxDriver(options);
 		} else if (botCounter == 3) {
-			botCounter ++;
+			botCounter++;
 			options.setProfile(profile3);
 			currentProfile = "Profile3";
 			// SeleniumBot = new FirefoxDriver(options);
 			// Selenium2 = new FirefoxDriver(options);
-		}
-		 else if (botCounter == 4) {
+		} else if (botCounter == 4) {
 			botCounter++;
 			options.setProfile(profile4);
-			currentProfile = "Profile4"; 
-		
-		//Selenium2 = new FirefoxDriver(options);
+			currentProfile = "Profile4";
+
+			// Selenium2 = new FirefoxDriver(options);
 		}
-		
+
 		else if (botCounter == 5) {
 			botCounter = 1;
 			options.setProfile(profile5);
-			currentProfile = "Profile5"; 
-		
-		//Selenium2 = new FirefoxDriver(options);
+			currentProfile = "Profile5";
+
+			// Selenium2 = new FirefoxDriver(options);
 		}
 //		else if (botCounter == 6) {
 //			botCounter ++;
