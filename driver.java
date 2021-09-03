@@ -24,25 +24,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-//import org.openqa.selenium.chrome.ChromeDriver;
-//import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
+
 
 //import javafx.application.Platform;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
 import java.io.IOException;
-import java.io.InputStream;
 
 
 
@@ -75,13 +66,12 @@ public class driver {
 		webDriver tabs = new webDriver("1629758158", 0);
 //		msg2Driver msg2 = new msg2Driver();
 //		msg3Driver msg3 = new msg3Driver("1628123480", 55);
-		msg4Driver msg4 = new msg4Driver("1628508744", 0);
+		msg4Driver msg4 = new msg4Driver("1630681778", 20);
 //		
 
 
 		System.setProperty("webdriver.firefox.driver", "geckodriver.exe");
 		mf.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		SystemTray tray = SystemTray.getSystemTray();
 		mf.setLocation(300, 100);
 		mf.setSize(550, 300);
 		mf.setTitle("TATA User MSG Sender");
@@ -180,6 +170,7 @@ public class driver {
 
 			}
 
+			@SuppressWarnings("deprecation")
 			public void windowIconified(WindowEvent e) {// Window minimized event
 
 				mf.setVisible(false);
@@ -211,6 +202,7 @@ public class driver {
 
 		instructions.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
@@ -226,9 +218,7 @@ public class driver {
 
 	}
 
-	private void createWindow() {
-
-	}
+	
 
 	// String windows = JOptionPane.showInputDialog(null,"Please enter how many tabs
 	// to refresh","TATA Refresher", JOptionPane.INFORMATION_MESSAGE);

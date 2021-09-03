@@ -1,6 +1,5 @@
 package pkg;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 
 import java.util.List;
@@ -8,19 +7,11 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.chrome.ChromeDriver;
-//import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.chromium.*;
-import org.openqa.selenium.edge.EdgeOptions;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -128,7 +119,6 @@ public class webDriver {
 
 		TimeUnit.MILLISECONDS.sleep(1500);
 		Actions actions = new Actions(SeleniumBot);
-		JavascriptExecutor jse = (JavascriptExecutor) SeleniumBot;
 		int chatNumber = 50;
 		while (true) {
 			try {
@@ -169,8 +159,6 @@ public class webDriver {
 			SeleniumBot.get("https://webk.telegram.org");
 
 			TimeUnit.MILLISECONDS.sleep(1500);
-
-			int errorcounter = 0;
 		}
 			catch (Exception e0)
 			{	e0.printStackTrace();
@@ -338,7 +326,11 @@ public class webDriver {
 
 					pinnedButton.click();
 
-					TimeUnit.MILLISECONDS.sleep(1500);
+					TimeUnit.MILLISECONDS.sleep(1000);
+					
+					pinnedButton.click();
+
+					TimeUnit.MILLISECONDS.sleep(2500);
 
 					List<WebElement> forwardedMessages = SeleniumBot
 							.findElements(By.cssSelector("div[data-timestamp='" + timestamp + "']"));
@@ -426,8 +418,8 @@ public class webDriver {
 //					writer.close();
 
 					driver.shillCounter++;
-					driver.counterTabs.setText("Total Shills: " + driver.shillCounter + "    Profile: "
-							+ webDriver.currentProfile + "   Profile Error: " + profileError);
+					driver.counterTabs.setText("Total User MSg: " + driver.shillCounter + "    Profile: "
+							+ webDriver.currentProfile + "   AutoShiller: " + driver.shillCounter4);
 
 					chooseProfile();
 					SeleniumBot.quit();

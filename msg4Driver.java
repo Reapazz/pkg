@@ -1,61 +1,15 @@
 package pkg;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.awt.SystemTray;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import javax.swing.Timer;
-
-import java.awt.AWTException;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.Image;
-import java.awt.PopupMenu;
-import java.awt.SystemTray;
-import java.awt.Toolkit;
-import java.awt.TrayIcon;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.chrome.ChromeDriver;
-//import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.chromium.*;
-import org.openqa.selenium.edge.EdgeOptions;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 
 public class msg4Driver {
 
@@ -203,10 +157,10 @@ public class msg4Driver {
 			}
 			
 			try {
-				MyThread t2 = new MyThread();
-				t2.start();
-				//testProfiles();
+				
+				
 				sendMessages(chatGroups1);
+				sendMessages(chatGroups2);
 				TimeUnit.MINUTES.sleep(30);
 			}
 			
@@ -229,23 +183,7 @@ public class msg4Driver {
 	}
 	
 	
-	 public class MyThread extends Thread {
-
-		    public void run(){
-		    	
-		    	try {
-					//testProfiles();
-					//t2.stop();
-					sendMessages(chatGroups2);
-				} catch (InterruptedException e) {
-					//t2.suspend();
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-		    
-		    }
-		  }
+	
 	
 	public void testProfiles() throws InterruptedException {
 		System.out.println("teststart");
@@ -282,21 +220,14 @@ public class msg4Driver {
 			TimeUnit.MILLISECONDS.sleep(3500);
 		
 
-			JavascriptExecutor jse = (JavascriptExecutor) SeleniumBot;
-			int errorcounter = 0;
-			
-
-			
-			
-
-				TimeUnit.MILLISECONDS.sleep(100);
+			TimeUnit.MILLISECONDS.sleep(100);
 				// -1552680596
 				// -1276487238
 				// -1549164370
 				// -1568729887
 				// -1578486075
 				Actions actions = new Actions(SeleniumBot);
-				JavascriptExecutor js = (JavascriptExecutor) SeleniumBot;
+				
 
 				// WebElement elementLocator = SeleniumBot.findElement(By.id("ID"));
 
@@ -335,9 +266,8 @@ public class msg4Driver {
 						TimeUnit.MILLISECONDS.sleep(3000);
 						
 						
-						WebElement scrollerChat = SeleniumBot.findElement(By.xpath
+						SeleniumBot.findElement(By.xpath
 								("/html/body/div[2]/div[1]/div[2]/div/div/div[3]/div"));
-						//scrollerChat.sendKeys(Keys.PAGE_UP);
 						
 						TimeUnit.MILLISECONDS.sleep(1000);
 						WebElement pinnedButton = SeleniumBot
@@ -355,41 +285,18 @@ public class msg4Driver {
 //						}
 						
 						//jse.executeScript("arguments[0].click()", pinnedButton);
-						pinnedButton.click();
+						//pinnedButton.click();
 					
 					
-						TimeUnit.MILLISECONDS.sleep(1000);
+						//TimeUnit.MILLISECONDS.sleep(1000);
 						pinnedButton.click();
 						
 						
-						TimeUnit.MILLISECONDS.sleep(1000);
+						TimeUnit.MILLISECONDS.sleep(1500);
 						
-						
-						
-						//SeleniumBot.get("https://webk.telegram.org");
-						//TimeUnit.MILLISECONDS.sleep(800);
-						
-//						SeleniumBot.findElement(By.xpath("/html/body/div[2]/div[1]/div[1]/div/div/div[1]/div[2]/input"))
-//						.sendKeys("TATABOT");
-//						TimeUnit.MILLISECONDS.sleep(500);
-				
-				
-//				SeleniumBot.findElement(By.xpath(
-//						"/html/body/div[2]/div[1]/div[1]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div/div[1]/ul/li"))
-//						.click();
-//				
-//				TimeUnit.MILLISECONDS.sleep(1500);
 						
 						
 
-//						SeleniumBot.findElement(By.xpath("/html/body/div[2]/div[1]/div[1]/div/div/div[1]/div[2]/input"))
-//								.sendKeys("TATABOT");
-//						TimeUnit.MILLISECONDS.sleep(500);
-//						SeleniumBot.findElement(By.xpath(
-//								"/html/body/div[2]/div[1]/div[1]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div/div[1]/ul/li"))
-//								.click();
-						// TimeUnit.MILLISECONDS.sleep(100000);
-						// TimeUnit.SECONDS.sleep(5);
 						// Slowmode groups
 						if (group == "-1471670592" || group =="-1310700854" ||group== "-1131831039" || group == "-1207243227" || group == "-1415725598" || group == "-1376683114"
 								|| group == "-1318198384"|| group == "-1191393895" || group == "-1194391409" || group == "-1295033862" || group == "-1466093530") {
@@ -400,7 +307,7 @@ public class msg4Driver {
 							
 							List<WebElement> forwardedMessages = SeleniumBot
 									.findElements(By.cssSelector("div[data-timestamp='" + timestamp + "']"));
-							WebElement zeeMessage = forwardedMessages.get(1);
+							WebElement zeeMessage = forwardedMessages.get(2);
 							actions.moveToElement(zeeMessage);
 							actions.contextClick(zeeMessage).build().perform();
 							TimeUnit.MILLISECONDS.sleep(1000);
@@ -432,42 +339,7 @@ public class msg4Driver {
 				
 							TimeUnit.MILLISECONDS.sleep(1000);
 
-//							WebElement forwardButton = SeleniumBot.findElement(
-//									By.className("selection-container-forward"));
-//									//("//div[@id='column-center']/div/div/div[4]/div/div[5]/div/button[2]/div"));
-//							actions.moveToElement(forwardButton);
-//							actions.click(forwardButton).build().perform();
-//							TimeUnit.MILLISECONDS.sleep(500);
-//							WebElement selector = SeleniumBot.findElement(By.className("selector"));
-//							WebElement scroller = selector.findElement(By.className("scrollable"));
-//							WebElement groupElement;
-//							int scrollCounter = 0;
-//							while (scrollCounter < 8) {
-//								scrollCounter++;
-//								try {
-//
-//									groupElement = selector.findElement(By.cssSelector(groupName));
-//									groupElement.click();
-//									break;
-//								}
-//
-//								catch (Exception scrollError) {
-//									scroller.sendKeys(Keys.PAGE_DOWN);
-//									TimeUnit.SECONDS.sleep(0);
-//
-//								}
-//
-//							}
-//							TimeUnit.MILLISECONDS.sleep(500);
-//							SeleniumBot
-//									.findElement(
-//											By.xpath("/html/body/div[2]/div[1]/div[2]/div/div[2]/div[4]/div/div[4]"))
-//									.click();
-//							System.out.println("Msg1 sent to group: " + group);
-//							driver.shillCounter++;
-//							driver.counterTabs.setText("Total Shills: " + driver.shillCounter);
-//
-//							continue;
+//							
 						}
 						
 						else {
@@ -495,18 +367,7 @@ public class msg4Driver {
 						
 					
 //								
-//								actions.moveToElement(appPicture);
-//								actions.contextClick(appPicture).build().perform();
-//							
-//								TimeUnit.MILLISECONDS.sleep(600);
-//							
-//
-//						
 //								
-//								actions.moveToElement(messageZee);
-//								actions.click(messageZee).build().perform();
-//								//scrollerChat.sendKeys(Keys.PAGE_UP);
-//								TimeUnit.MILLISECONDS.sleep(400);
 
 						
 						actions.moveToElement(appPicture);
@@ -528,7 +389,7 @@ public class msg4Driver {
 						actions.click(messageZee).build().perform();
 						TimeUnit.MILLISECONDS.sleep(500);
 						
-						pinnedButton.click();
+						//pinnedButton.click();
 						
 						TimeUnit.MILLISECONDS.sleep(800);
 						
@@ -589,8 +450,8 @@ public class msg4Driver {
 						
 						System.out.println("Msg4 sent to group: " + group);
 						driver.shillCounter4++;
-						driver.counterTabs.setText("Total Shills: " +"1: "+ driver.shillCounter + " 2: "+ driver.shillCounter2+ " 3:"
-						+ driver.shillCounter3+ " 4:"+driver.shillCounter4 );
+						driver.counterTabs.setText("Total User MSg: " + driver.shillCounter + "    Profile: "
+								+ webDriver.currentProfile + "   AutoShiller: " + driver.shillCounter4);
 						TimeUnit.SECONDS.sleep(2);
 						break;
 					}

@@ -1,6 +1,5 @@
 package pkg;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import java.io.File;
@@ -247,11 +246,11 @@ public class webDriverOld {
 			}
 			
 			try {
-				MyThread t2 = new MyThread();
-				t2.start();
+				
 				//testProfiles();
 				sendMessages(chatGroups1);
-				TimeUnit.MINUTES.sleep(90);
+				sendMessages(chatGroups2);
+				TimeUnit.MINUTES.sleep(40);
 			}
 			
 			catch (Exception error) {
@@ -326,21 +325,14 @@ public class webDriverOld {
 			TimeUnit.MILLISECONDS.sleep(3500);
 		
 
-			JavascriptExecutor jse = (JavascriptExecutor) SeleniumBot;
-			int errorcounter = 0;
-			
-
-			
-			
-
-				TimeUnit.MILLISECONDS.sleep(100);
+			TimeUnit.MILLISECONDS.sleep(100);
 				// -1552680596
 				// -1276487238
 				// -1549164370
 				// -1568729887
 				// -1578486075
 				Actions actions = new Actions(SeleniumBot);
-				JavascriptExecutor js = (JavascriptExecutor) SeleniumBot;
+				
 
 				// WebElement elementLocator = SeleniumBot.findElement(By.id("ID"));
 
@@ -379,9 +371,8 @@ public class webDriverOld {
 						TimeUnit.MILLISECONDS.sleep(3000);
 						
 						
-						WebElement scrollerChat = SeleniumBot.findElement(By.xpath
+						SeleniumBot.findElement(By.xpath
 								("/html/body/div[2]/div[1]/div[2]/div/div/div[3]/div"));
-						//scrollerChat.sendKeys(Keys.PAGE_UP);
 						
 						TimeUnit.MILLISECONDS.sleep(1000);
 						WebElement pinnedButton = SeleniumBot
@@ -615,17 +606,7 @@ public class webDriverOld {
 
 						}
 
-//			scroller.sendKeys(Keys.PAGE_DOWN);
-//			TimeUnit.SECONDS.sleep(0);
-//			scroller.sendKeys(Keys.PAGE_DOWN);
-//			TimeUnit.SECONDS.sleep(0);
-//			scroller.sendKeys(Keys.PAGE_DOWN);
-//			TimeUnit.SECONDS.sleep(0);
-//			scroller.sendKeys(Keys.PAGE_DOWN);
-						//TimeUnit.MILLISECONDS.sleep(500);
-						// ((Object) selector).scrollTop(250);
-						// actions.moveToElement(selector).build().perform();
-						// actions.click(forwardButton).build().perform();
+
 
 						TimeUnit.MILLISECONDS.sleep(500);
 						// SeleniumBot.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div/div/div[4]/div/div[1]/div[6]/div[1]/div[1]")).sendKeys("Forwarded
@@ -636,8 +617,7 @@ public class webDriverOld {
 						
 						System.out.println("Msg1 sent to group: " + group);
 						driver.shillCounter++;
-						driver.counterTabs.setText("Total Shills: " +"1: "+ driver.shillCounter + " 2: "+ driver.shillCounter2+ " 3:"+ driver.shillCounter3+ " 4:"
-						+driver.shillCounter4 + "    Profile: " +currentProfile);
+						
 
 						TimeUnit.SECONDS.sleep(2);
 						break;
