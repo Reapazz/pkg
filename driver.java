@@ -5,33 +5,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import javax.swing.Timer;
+
 
 import java.awt.AWTException;
 import java.awt.BorderLayout;
-import java.awt.Color;
+
 import java.awt.FlowLayout;
-import java.awt.Font;
+
 import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.PopupMenu;
-import java.awt.SystemTray;
-import java.awt.Toolkit;
+
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -50,9 +41,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.io.IOException;
 import java.io.InputStream;
 
-import javax.swing.JFrame;
+
 
 public class driver {
 
@@ -83,7 +75,7 @@ public class driver {
 		webDriver tabs = new webDriver("1629758158", 0);
 //		msg2Driver msg2 = new msg2Driver();
 //		msg3Driver msg3 = new msg3Driver("1628123480", 55);
-//		msg4Driver msg4 = new msg4Driver("1628508744", 0);
+		msg4Driver msg4 = new msg4Driver("1628508744", 0);
 //		
 
 
@@ -111,6 +103,23 @@ public class driver {
 			}
 		});
 		
+
+		Thread t4 = new Thread(new Runnable() {
+			public void run() {
+
+				try {
+
+					msg4.run();
+
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		
 		
 		
@@ -164,7 +173,7 @@ public class driver {
 			public void windowClosing(WindowEvent e) {
 				
 				tabs.closeTabs();
-				
+				msg4.closeTabs();
 				
 				System.exit(0);
 				// super.wait();
@@ -191,7 +200,7 @@ public class driver {
 
 				t1.start();
 				
-				//t2.start();
+				t4.start();
 				
 				
 

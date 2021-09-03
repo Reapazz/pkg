@@ -2,52 +2,12 @@ package pkg;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
-//import com.sun.tools.javac.util.Options;
-
-import java.awt.SystemTray;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import javax.swing.Timer;
-
-import java.awt.AWTException;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.Image;
-import java.awt.PopupMenu;
-import java.awt.SystemTray;
-import java.awt.Toolkit;
-import java.awt.TrayIcon;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 //import org.openqa.selenium.chrome.ChromeDriver;
@@ -55,6 +15,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.chromium.*;
 import org.openqa.selenium.edge.EdgeOptions;
+
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -62,6 +24,7 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.interactions.Actions;
 
 public class webDriver {
 
@@ -81,11 +44,11 @@ public class webDriver {
 
 	// public static File file = new File("./profiles2/Profile1"); // Ehlers
 	// public static File file2 = new File("./profiles2/Profile2");// Elise Sierra
-	public static File file1 = new File("./profiles2/Profile3");// Riaz Sawyer
-	public static File file2 = new File("./profiles2/Profile4");// FrederickVelez
-	public static File file3 = new File("./profiles2/Profile5");// Eleni Hansen
-	public static File file4 = new File("./profiles2/Profile6");// Abdu Rohamn
-	public static File file5 = new File("./profiles2/Profile7");// A E
+//	public static File file1 = new File("./profiles2/Profile3");// Riaz Sawyer
+//	public static File file2 = new File("./profiles2/Profile4");// FrederickVelez
+//	public static File file3 = new File("./profiles2/Profile5");// Eleni Hansen
+//	public static File file4 = new File("./profiles2/Profile6");// Abdu Rohamn
+//	public static File file5 = new File("./profiles2/Profile7");// A E
 //	//public static File file5 = new File("./profiles/Profile5");
 //	public static File file6 = new File("./profiles/Profile6");
 //	public static File file5 = new File("./profiles/Profile5"); //Darien Clegg
@@ -93,6 +56,19 @@ public class webDriver {
 //	public static File file8 = new File("./profiles/Profile8");// Emmanuel Dougherty
 //	public static File file9 = new File("./profiles/Profile9");// Cecil Porter
 //	
+	public static File file1 = new File("./profiles2/1");
+	public static File file2 = new File("./profiles2/2");
+	public static File file3 = new File("./profiles2/3");
+	public static File file4 = new File("./profiles2/4");
+	public static File file5 = new File("./profiles2/5");
+	public static File file6 = new File("./profiles2/6");
+	public static File file7 = new File("./profiles2/7");
+	public static File file8 = new File("./profiles2/8");
+	public static File file9 = new File("./profiles2/9");
+	public static File file10 = new File("./profiles2/10");
+	
+	
+	
 //	//public static FirefoxProfile profile = new FirefoxProfile(file7);
 
 //	public static FirefoxProfile profile4 = new FirefoxProfile(file4);
@@ -104,15 +80,23 @@ public class webDriver {
 	public static FirefoxProfile profile = new FirefoxProfile(file1);
 	public static FirefoxProfile profile2 = new FirefoxProfile(file2);
 	public static FirefoxProfile profile3 = new FirefoxProfile(file3);
-	public static FirefoxProfile profile4 = new FirefoxProfile(file4);
-	public static FirefoxProfile profile5 = new FirefoxProfile(file5);
+	public static FirefoxProfile profile4 = new FirefoxProfile(file6);
+	public static FirefoxProfile profile5 = new FirefoxProfile(file8);
+	public static FirefoxProfile profile6 = new FirefoxProfile(file10);
+	public static FirefoxProfile profile7 = new FirefoxProfile(file1);
+	public static FirefoxProfile profile8 = new FirefoxProfile(file2);
+	public static FirefoxProfile profile9 = new FirefoxProfile(file3);
+	public static FirefoxProfile profile10 = new FirefoxProfile(file8);
 
 	public int waitTime;
 	public static String currentProfile;
 	public static int botCounter = 3;
 	public static int noChangeProfiles = 0;
+	public static int down = 0;
 	public String profileError = null;
-
+	public boolean recentError= false;
+	public int scrollCounter = 0;
+	public boolean success = false;
 	public webDriver(String messageTimestamp, int wait) {
 
 		timestamp = messageTimestamp;
@@ -128,6 +112,7 @@ public class webDriver {
 	public void sendMsg() throws InterruptedException, IOException {
 		String chatString = null;
 		// options.setProfile(profile2);
+		 options.setHeadless(true);
 		chooseProfile();
 		FirefoxDriver SeleniumBot = null;
 		SeleniumBot = new FirefoxDriver(options);
@@ -144,12 +129,13 @@ public class webDriver {
 		TimeUnit.MILLISECONDS.sleep(1500);
 		Actions actions = new Actions(SeleniumBot);
 		JavascriptExecutor jse = (JavascriptExecutor) SeleniumBot;
-
+		int chatNumber = 50;
 		while (true) {
+			try {
 
-			if (noChangeProfiles > 7) {
+			if (noChangeProfiles > 3 || down > 30) {
 				profileError = currentProfile;
-
+				down = 0;
 				driver.counterTabs.setText("Total Shills: " + driver.shillCounter + "    Profile: "
 						+ webDriver.currentProfile + "   Profile Error: " + profileError);
 
@@ -170,21 +156,26 @@ public class webDriver {
 				TimeUnit.MILLISECONDS.sleep(1500);
 				actions = new Actions(SeleniumBot);
 
-				TimeUnit.SECONDS.sleep(40);
+				TimeUnit.SECONDS.sleep(10);
 
 			}
 
 			noChangeProfiles++;
 
-			boolean recentError = false;
-			boolean success = false;
-			int scrollCounter = 0;
-			int chatNumber = 1;
+			recentError = false;
+			success = false;
+			scrollCounter = 0;
+			
 			SeleniumBot.get("https://webk.telegram.org");
 
 			TimeUnit.MILLISECONDS.sleep(1500);
 
 			int errorcounter = 0;
+		}
+			catch (Exception e0)
+			{	e0.printStackTrace();
+				continue;
+			}
 			try {
 
 				// options.setHeadless(true);
@@ -209,6 +200,12 @@ public class webDriver {
 				scroller.sendKeys(Keys.PAGE_DOWN);
 
 				while (true) {
+					
+					if (down >30 ) {
+						recentError = true;
+						break;
+						
+					}
 					@SuppressWarnings("resource")
 
 					Scanner scanner = new Scanner(file);
@@ -242,10 +239,19 @@ public class webDriver {
 						break;
 
 					} catch (Exception errorFindingChat) {
+						
+						
 						System.out.println("error finding chat");
 						errorFindingChat.printStackTrace();
-						recentError = true;
-						break;
+						 scroller = SeleniumBot
+								.findElement(By.xpath("/html/body/div[2]/div[1]/div[3]/div/div/div[2]/div"));
+
+						scroller.sendKeys(Keys.PAGE_DOWN);
+						System.out.println("Page Down");
+						down++;
+						System.out.println(down);
+						//recentError = true;
+						//break;
 					}
 
 				}
@@ -438,7 +444,7 @@ public class webDriver {
 					TimeUnit.MILLISECONDS.sleep(1500);
 					actions = new Actions(SeleniumBot);
 
-					TimeUnit.SECONDS.sleep(40);
+					TimeUnit.SECONDS.sleep(10);
 				}
 
 			}
@@ -457,7 +463,7 @@ public class webDriver {
 		if (botCounter == 1) {
 			botCounter++;
 			options.setProfile(profile);
-			currentProfile = "Profile1";
+			currentProfile = "Profile4";
 			// SeleniumBot = new FirefoxDriver(options);
 			// Selenium2 = new FirefoxDriver(options);
 
@@ -482,26 +488,44 @@ public class webDriver {
 		}
 
 		else if (botCounter == 5) {
-			botCounter = 1;
+			botCounter ++;
 			options.setProfile(profile5);
 			currentProfile = "Profile5";
+		}
+		
+		else if (botCounter == 6) {
+			botCounter++;
+			options.setProfile(profile6);
+			currentProfile = "Profile6";
+			// SeleniumBot = new FirefoxDriver(options);
+			// Selenium2 = new FirefoxDriver(options);
+		} else if (botCounter == 7) {
+			botCounter++;
+			options.setProfile(profile7);
+			currentProfile = "Profile7";
+			// SeleniumBot = new FirefoxDriver(options);
+			// Selenium2 = new FirefoxDriver(options);
+		} else if (botCounter == 8) {
+			botCounter++;
+			options.setProfile(profile8);
+			currentProfile = "Profile8";
 
 			// Selenium2 = new FirefoxDriver(options);
 		}
-//		else if (botCounter == 6) {
-//			botCounter ++;
-//			options.setProfile(profile6);
-//			currentProfile = "Profile"; 
-//		
-//		//Selenium2 = new FirefoxDriver(options);
-//		}
-//		else if (botCounter == 7) {
-//			botCounter =1;
-//			options.setProfile(profile7);
-//			currentProfile = "Profile7"; 
-//		
-//		//Selenium2 = new FirefoxDriver(options);
-//		}
+
+		else if (botCounter == 9) {
+			botCounter ++;
+			options.setProfile(profile9);
+			currentProfile = "Profile9";
+		}
+		
+		else if (botCounter == 10) {
+			botCounter = 1;
+			options.setProfile(profile10);
+			currentProfile = "Profile10";
+		}
+
+
 
 		System.out.println("testprofile");
 	}
